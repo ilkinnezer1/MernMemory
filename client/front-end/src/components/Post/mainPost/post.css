@@ -1,0 +1,17 @@
+.editing{
+    position:absolute !important;
+    margin: 10px 0 0 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+}
+p{
+    cursor: pointer;
+}
+
+.buttons{
+    margin-top: 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
