@@ -5,6 +5,10 @@ const initialValue = {
 
 export default function posts (state=initialValue, action){
     switch (action.type){
+        case "FETCH_SINGLE_POST":
+            return {...state, post:action.payload}
+        case "SEARCH_ALL":
+            return state=action.payload
         case "LIKE_POST": 
         return state.map((post) => post._id === action.payload._id ? action.payload : post )// that will send data to state posts
         case "DELETE" :

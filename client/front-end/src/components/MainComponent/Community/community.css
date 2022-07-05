@@ -1,0 +1,53 @@
+.spi-sec{
+    background-image: url("image-1.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+.spi-container{
+    position: relative;
+}
+.spi-container::after{
+    background-image: url("dots.svg");
+    background-repeat: no-repeat;
+    content: '';
+    height: 167px;
+    position: absolute;
+    width: 150px;
+    bottom: -160px;
+    left: -20px;
+    z-index: 1;
+}
+.spi-container::before{
+    background-image: url("dots.svg");
+    background-repeat: no-repeat;
+    content: '';
+    height: 165px;
+    position: absolute;
+    width: 167px;
+    top: -200px;
+    right: -20px;
+    z-index: 1;
+}
+.text{
+    font-size: 23px;
+    color: white;
+    line-height: 35px;
+    margin-bottom: 13px;
+}
+.meet{
+    color: #a9bcc5;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    cursor: pointer;
+    text-decoration: none;
+}
+.meet:hover{
+    text-decoration: none;
+    color: #a9bcc5;
+    
+}

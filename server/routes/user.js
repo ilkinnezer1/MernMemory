@@ -1,13 +1,16 @@
+import {} from "dotenv/config.js"
 import express from "express"
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import UserInfo from "../models/userInfo.js"
+import auth from "../middleware/auth.js"
 
 
 const router = express.Router()
 
-router.post("/register", async (req, res) => {
+router.post("/register",auth, async (req, res) => {
     const {email, name, password, surname, confirmPassword} = req.body
+     const saltRounds = 12
     try{
         if(!(email && password && name && surname && confirmPassword)){
             return res.status(400).send("All input is required");
@@ -17,21 +20,23 @@ router.post("/register", async (req, res) => {
                return res.status(409).send("User Already Exist. Please Login");
             }
             if(password !== confirmPassword) return res.status(400).json({message: "Password you write does not match"})
-      
-            const encryptedPassword = await bcrypt.hash(password, 10);
-      
-            const result = await UserInfo.create({email: email.toLowerCase, name, surname , password: encryptedPassword})
-            const token = jwt.sign({email: result.email,  id: result._id}, "test", {expiresIn: "1h"})
+           
+            const encryptedPassword = await new Promise((resolve, reject) => {
+                bcrypt.hash(password.toString(), saltRounds, (err, hash) => {
+                  if (err) reject(err)
+                  resolve(hash)
+                });
+              })
+            const result = await UserInfo.create({email: email, name:name, surname:surname , password: encryptedPassword})
+            const token = jwt.sign({email: result.email,  id: result._id}, process.env.ACCESS_TOKEN, {expiresIn: "1h"})
             result.token = token
             res.status(201).json({result, token});
     }catch(error){
         console.log(error)
     }
-
-    
 })
 
-router.post("/login", async (req, res) => {
+router.post("/login", auth, async (req, res) => {
     const {email, password} = req.body
     console.log(req.body)
     try{
@@ -40,7 +45,7 @@ router.post("/login", async (req, res) => {
           }
              const user = await UserInfo.findOne({email})
           if (user) {
-             const token = jwt.sign({email: user.email, id: user._id }, "test", {expiresIn: "1h"})
+             const token = jwt.sign({email: user.email, id: user._id }, process.env.ACCESS_TOKEN, {expiresIn: "1h"})
              user.token = token
             return res.status(200).json({result: user, token});
             }

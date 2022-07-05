@@ -9,14 +9,26 @@ export const getPost = async (req, res) => {
         res.status(404).json({message: error.message})
      }
 }
+//Getting specific post 
+export const getSpecialPost = async (req, res) => {
+    const {id} = req.params; //Identifies single post id 
+    try{
+        const posts  = await PostMessages.findById(id) // Finding posts with its id
+        res.status(201).json(posts)
+    }catch(error){
+        res.status(401).json({message: error.message})
+    }
+}
+
 export const createPost = async (req, res) => {
      //Request body helps us to find the post
      const postBody = req.body //specifies the data as a object
-     const newPost = new PostMessages({...postBody, creator: req.userId, createdAt: new Date().toISOString}) //Takes all data and specifies
+     const newPost = new PostMessages({...postBody, creator: req.userId}) //Takes all data and specifies
      try{
        await newPost.save() // Saving database 
      res.status(201).json(newPost) // sending new post to front
      }catch(error){
+         console.log(error)
        res.status(409).json({message: error.message})
     }
 }
@@ -60,3 +72,15 @@ export const likePost = async (req, res) => {
     const likedPost = await PostMessages.findByIdAndUpdate(id, post, {new:  true}) //to increment specific target in database by clicking button
         res.status(200).json(likedPost) // Sending data to frontEnd
 }
+export const getPostbySearch = async (req, res) => {
+         const {searchQuery, tags} = req.query //Receving query from front end 
+    try{
+        const title = new RegExp(searchQuery, "i") //Modify and make all search value same letter
+        const posts = await PostMessages.find({$or: [{title}, {tags: {$in: tags.split(",")} } ]}) //Checking the existence of posts with specific title coming from search input
+        res.status(201).json({data: posts}) // Sending specific posts 
+     }catch(error){
+        res.status(404).json({message: error.message})
+     }
+}   
+
+//, {tags: {$in: tags.split(',')}}

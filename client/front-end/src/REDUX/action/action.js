@@ -2,7 +2,9 @@ import {fetchPosts,
          createPost, 
          updatePost, 
          deletePost, 
-         likePost} from "../../Api/api"
+         likePost,
+         fetchPostsBySearch,
+         fetchSinglePost} from "../../Api/api"
          //Sending data to reducer with different functions
          //THAT helps to reach data in reducer
  const getPost = () => async (dispatch) =>  {
@@ -14,11 +16,30 @@ import {fetchPosts,
     }
 }
 export default getPost
+
+//Fetching single post 
+export const getSinglePost = (id) => async (dispatch) => {
+    try{
+        const {data} = await fetchSinglePost(id)
+        dispatch({type: "FETCH_SINGLE_POST", payload: data})
+    }catch(error){
+        console.log(error.message)
+    }
+}
+
+export const getPostbySearch = (searchQuery) => async (dispatch) => {
+    try {
+        const {data:{data}} = await fetchPostsBySearch(searchQuery)
+        dispatch({type: "SEARCH_ALL" , payload: data})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 //That makes new post to add database and also REDUX state
 export const createNewPost = (post) => async (dispatch) => {
     try{
         const {data} = await createPost(post);
-        console.log("this is",data);
         dispatch({type: "CREATE_POST",  payload: data})
     }catch(error){
         console.log(error)

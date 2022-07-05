@@ -11,10 +11,10 @@ import reducer from "./REDUX/reducers/index"
 const store = createStore(reducer, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
     <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );

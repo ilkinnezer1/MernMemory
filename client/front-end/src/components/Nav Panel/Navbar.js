@@ -4,7 +4,10 @@ import {Link} from "react-router-dom"
 import { useDispatch } from 'react-redux'
 import decode from "jwt-decode"
 import { useHistory, useLocation } from 'react-router-dom'
-import {Button} from "reactstrap"
+import Avatar from 'react-avatar'
+import {Button,Container} from "reactstrap"
+import logo from './logo.svg'
+
 
 
 const Navbar = () =>  {
@@ -14,13 +17,12 @@ const dispatch = useDispatch()
 const history = useHistory()
 const location = useLocation()
 
-
-       const handleLogOut = () => {
+       const handleLogOut = () => { 
           dispatch({type:"LOGOUT"})
             history.push('/auth')
                setMockUser(null)
             }
-             
+
             useEffect(()=> {
                 const token = mockUser?.token
                 if(token){
@@ -33,25 +35,37 @@ const location = useLocation()
          
 
     return (
-        <nav className="navbar navbar-light bg-dark">
-          <Link className="navbar-brand" to="/">
-            Bootstrap
+        <nav className=" navbar navbar-light bg-light d-flex justify-content-between">
+            <Container>
+            <div className="navbar-brand">
+            <Link to="/">
+                  <img className="navImg" src={logo} />
           </Link>
-            <div>
+              </div>
+         <div>
                 {mockUser?.result ? (
-                    <div>
-                        <img alt={mockUser.result?.name} src={mockUser.result?.imageUrl} className="avatar"/>
-                            <span style={{color: "white"}}>{mockUser.result?.name}</span>
-                        <div className="user-name">{mockUser.result?.name}</div>
+                    <div className="other">
+                        <div className="other">
+                        <Avatar color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue', 'gray', 'white','black'])}
+                        name={mockUser.result?.name}
+                        round 
+                        size="40" 
+                        src={mockUser.result?.imageUrl}
+                        textSizeRatio={2}/>
+                            <span style={{color: "black",  margin: "10px 5px 0 5px",}}>{mockUser.result?.name}</span>
+                        <div style={{margin: "10px 5px 0 5px"}} className="user-name">{mockUser.result?.surname}</div>
+                        </div>
                         <Button color="danger" onClick={handleLogOut}>Logout</Button>
                     </div>
                 ) : (
+                    <div>
                     <Link to="/auth">
                       <Button color="success">Sign in</Button>
                     </Link>
-                  
+                    </div>
                 )}
-            </div>
+         </div>
+         </Container>
         </nav>
     )
 }

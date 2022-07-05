@@ -4,8 +4,10 @@ import {useDispatch} from "react-redux"
 import {useHistory } from 'react-router-dom'
 import {GoogleLogin} from "react-google-login"
 import {signInNewProfile, signUpNewAccount } from '../../REDUX/action/auth'
-import {Grid} from "@material-ui/core"
+import {Container, Grid} from "@material-ui/core"
+import img from './icon.jpeg'
 import "./Auth.css"
+
 
 const Auth = () => {
     const INITIAL_STATE = {
@@ -59,21 +61,23 @@ const history = useHistory()
     }
 
     return (
-        <div className="main-container">
-            <form className="form-container" onSubmit={handleSubmit}>
-            <img src="#" className="avatar"/>
-        <div>{isSignUp ? "Sign up" : "Sign in"}</div> 
+        <div className=" main-container">
+            <Container>
+            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+            <form className="main form-container" onSubmit={handleSubmit}>
+            <img src={img} className="avatar mt-2 mb-1"/>
+        <div className="h1">{isSignUp ? "Sign up" : "Sign in"}</div> 
         <Grid container spacing={2}> 
         <div className="container-wrapper">
             {isSignUp && (
                 <>
-                    <div className="main-input-group">
+                    <div className=" main-input-group">
                     <InputCont name="name" label="Your name" handleChange={handleChange}/>
                     <InputCont name="surname" label="Your surname" handleChange={handleChange}/>
                     </div>
                 </>
             )}
-            <div className="second-input-group">
+            <div className="second-input-group text-white">
                 <div className="first">
                 <InputCont name="email" label="Email" handleChange={handleChange} type={"email"} />
                 </div>
@@ -89,7 +93,7 @@ const history = useHistory()
         <GoogleLogin
          clientId="74369160375-94lchn31v8jivfash19jfe9605cs8v07.apps.googleusercontent.com"
          render={renderProps => (
-             <button className="btn btn-dark" onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign up with Google</button>
+             <button className="btn btn-primary mt-5 p-2 rounded" onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign up with Google</button>
          )}
          onSuccess = {googleSuccess}
          onFailure = {googleFailure}
@@ -106,6 +110,8 @@ const history = useHistory()
                 </Grid>
             </Grid>
 </form>
+</div>
+</Container>
         </div>
     )
 }

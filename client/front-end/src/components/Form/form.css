@@ -2,19 +2,18 @@
     resize:none;
 }
 .main-form{
+    margin-top: 20px;
     color: white;
     flex-direction: column;
     justify-content:center;
     flex-wrap: nowrap;
-    width:30%;
-    margin-left: 90px;
 }
 .header-text{
     font-size: 23px !important;
     text-align: center !important;
     border-radius: 20px;
     font-weight: 300;
-    box-shadow: 20px 12px 12px black;
+    box-shadow: 2px 6px 6px rgb(236, 174, 59);
 }
 label{
     font-weight: 200;

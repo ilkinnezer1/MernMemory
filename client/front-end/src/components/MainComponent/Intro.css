@@ -1,0 +1,45 @@
+.container-main{
+    min-height: 30vh;
+    background:#f7fafc;
+    border-radius: 20px;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+.logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.logo h1, .logo p{
+    padding-left: 30px;
+    color: green;
+    font-weight: bold;
+}
+
+.title-spi, .description{
+    margin-bottom: 0;
+    color:#1c2f38;
+}
+.text-container{
+    display: flex;
+    justify-content: center;
+}
+.intro-text{
+    font-size: 18px;
+    font-weight: 500;
+    color:#526d7a;
+    line-height: 31.5px;
+    text-size-adjust: 100%;
+}
+@media only screen and (max-width: 768px) {
+     
+    .logo{
+        text-align: center;
+    }
+    .logo h1, .logo p{
+        padding-left: 0px;
+    }
+    .text{
+        text-align: center;
+    }
+}

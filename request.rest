@@ -1,0 +1,12 @@
+POST http://localhost:5000/users/register
+
+Content-Type: application/json
+
+{
+   "name" : "Ilkin Nazarov",
+   "surname" : "Hello",
+   "email" : "ilkin@gmail.com",
+   "password": 123123,
+   "confirmPassword": 123123
+
+}

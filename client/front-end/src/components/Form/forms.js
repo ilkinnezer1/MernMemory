@@ -14,8 +14,7 @@ const FormElements = ({currentId, setCurrentId}) =>  {
 // HandleSubmit will send data received from form elements to backEnd
     const handleSubmit = e => {
         e.preventDefault()
-
-        if(currentId===0){
+        if(currentId===null){
           dispatch(createNewPost({...inputData, name: user?.result?.name}))
         }else{
           dispatch(updateNewPost(currentId,{...inputData, name: user?.result?.name}))
@@ -31,7 +30,7 @@ const FormElements = ({currentId, setCurrentId}) =>  {
 
     if(!user?.result?.name){
       return(
-        <div>You can't share any post </div>
+        <div className="alert-danger p-2">You can't share any post without registration, unfortunately. For using excellent functionalites, sign up. </div>
       )
     }
 
@@ -48,13 +47,13 @@ const clearText = () => {
     // Controlling its value and submit all data for sending to the database
     return (
         <Form className="main-form d-flex" onSubmit={handleSubmit}>
-        <FormGroup className="header-text bg bg-dark p-2 mb-3">
-        <FormText color="light" >
-         {currentId ? "Edit your impression": "Create your short impression"}
+        <FormGroup className="header-text bg bg-warning p-2 mb-3">
+        <FormText color="dark" >
+         {currentId ? "Edit your article": "Create your article"}
         </FormText>
       </FormGroup>
-      <FormGroup className="mb-2">
-        <Label className="mb-2" for="title">Title</Label>
+      <FormGroup >
+        <Label  for="title">Title</Label>
         <Input
          required
          autoComplete="off"
@@ -65,8 +64,8 @@ const clearText = () => {
          value={inputData.title}
          onChange={(e)=>setInputData({...inputData, title: e.target.value})}/>
       </FormGroup>
-      <FormGroup className="mb-2">
-        <Label className="mb-2" for="title">Tags</Label>
+      <FormGroup>
+        <Label for="title">Tags</Label>
         <Input 
          required
          type="text" 
@@ -93,8 +92,8 @@ const clearText = () => {
         type="file"
         multiple={false}
         onDone ={({base64}) => setInputData({...inputData, selectedFile: base64})}/> 
-      <Button type="submit" className="btn btn-success mt-2">Share</Button>
-      <Button className="btn btn-danger mb-2 mt-2" onClick={clearText}>Cancel</Button>
+      <Button type="submit" className="btn btn-success mt-4">Share</Button>
+      <Button className="btn btn-danger my-3" onClick={clearText}>Cancel</Button>
     </Form>
     )
 }

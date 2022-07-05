@@ -1,0 +1,13 @@
+.text-container a{
+    text-decoration: none;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.text-container a:hover{
+    text-decoration: underline;
+    transition: all .6s ease-in;
+}
+
+.logos span{
+    margin: 0 15px 4px 15px;
+}

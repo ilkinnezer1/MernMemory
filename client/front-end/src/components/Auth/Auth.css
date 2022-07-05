@@ -1,13 +1,10 @@
 .main-container{
-    /* background-image: url("background.jpeg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
-    background:linear-gradient(to right, #be93c5, #7bc6cc);
-    min-height: 93.4vh;
+    background:linear-gradient(to right, #4a6886, #37a2e9);
+    min-height: 90vh;
     display:flex;
     align-items: center;
     justify-content: center;
+
 }
 .avatar {
     vertical-align: middle;
@@ -16,9 +13,9 @@
     border-radius: 50%;
 }
 .form-container{
-    border: 1px solid gray;
-    box-shadow: 5px 5px 3px gray;
-    min-width:100vh;
+    /* border: 1px solid gray;
+    box-shadow: 5px 5px 3px gray; */
+    height: 300px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -52,3 +49,12 @@
     font-weight: 200;
     font-size:22px;
 }
+@media only screen and (max-width: 768px) {
+     
+        .button{
+            justify-content: center !important;
+        }
+        .p-tag{
+            justify-content: center !important;
+        }
+  }

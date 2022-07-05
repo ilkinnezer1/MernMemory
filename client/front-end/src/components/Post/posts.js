@@ -8,12 +8,12 @@ import "./posts.css"
 const Posts = ({setCurrentId}) =>  {    
         const posts = useSelector(state => state.posts)
         return (
-        !posts.length ? <CircularProgress size={'1 rem'}/> : (
-            <Container className="container-fluid">
+        !posts.length ? <CircularProgress size={1}/> : (
+            <Container>
                 <Row>
                 {
                     posts.map(post => (
-                        <Col sm={12} xl={6} md={6} lg={4}  key={post._id}>
+                        <Col sm={12} xl={4} md={6} lg={6} xs={12}  key={post._id}>
                          <Post post={post} setCurrentId={setCurrentId}/>
                           </Col>
                     ))

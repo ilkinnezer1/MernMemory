@@ -1,10 +1,10 @@
-
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRouter from "./routes/posts.js"
-import route from "./routes/user.js"
+import userRouter from "./routes/user.js" 
+
 
 const app = express();
 
@@ -15,7 +15,8 @@ app.use(express.json({ limit: '30mb', extended: true}));
 app.use(cors());
 
 app.use("/posts" , postRouter)
-app.use("/user", route )
+app.use('/users', userRouter) 
+
 
 const CONNECTION_URL = 'mongodb+srv://IlkinNazarov:ilkin555@memories.8ahn5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;

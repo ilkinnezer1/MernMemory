@@ -1,0 +1,8 @@
+.paper{
+    margin-top: 33px;
+    background: linear-gradient(to right, #44a08d , #093637);
+}
+.tags{
+    color: rgb(62, 62, 243) !important;
+    font-weight: 900 !important;
+}
